@@ -1,0 +1,235 @@
+CREATE TABLE [dbo].[UserDetail](
+	[UserId] [smallint] NOT NULL,
+	[UserName] [varchar](50) NOT NULL,
+	[UserGroupId] [smallint] NULL,
+	[PassWord] [varchar](255) NULL,
+	[PassWordAllocatedBy] [smallint] NOT NULL,
+	[PassWordAllocatedon] [datetime] NULL,
+	[LoginStatus] [smallint] NOT NULL,
+	[LoginCount] [smallint] NULL,
+	[Status] [smallint] NULL,
+	[BranchId] [smallint] NOT NULL,
+	[SpecialRightsCount] [smallint] NULL,
+	[CreatedBy] [smallint] NULL,
+	[CreatedOn] [datetime] NULL,
+	[ValidFrom] [datetime] NULL,
+	[ValidUpto] [datetime] NULL,
+	[ShortName] [char](3) NULL,
+	[LastPassword] [varchar](20) NULL,
+	[DOB] [datetime] NULL,
+	[LogonName] [varchar](50) NULL)
+
+
+CREATE TABLE [dbo].[UserGroup](
+	[UserGroupId] [smallint] NOT NULL,
+	[UserGroup] [varchar](50) NULL,
+	[BranchId] [smallint] NOT NULL)
+
+
+CREATE TABLE [dbo].[SocReceiptDetails](
+	[ReceiptNo] [int] NOT NULL,
+	[BillNo] [int] NOT NULL,
+	[ReceiptDate] [datetime] NULL,
+	[GLNodeId] [int] NULL,
+	[LevelMasterId] [int] NULL,
+	[SocietyId] [int] NULL,
+	[FlatMasterID] [int] NULL,
+	[FlatNo] [int] NOT NULL,
+	[Month] [varchar](8) NOT NULL,
+	[FinYearFrom] [datetime] NULL,
+	[FinYearTo] [datetime] NULL,
+	[ReceiptAmount] [money] NULL,
+	[ModeOfPayment] [smallint] NULL,
+	[OWScheduleIdentityID] [int] NULL,
+	[OWScheduleDate] [datetime] NULL,
+	[OWBatchID] [int] NULL,
+	[OWClearingId] [int] NULL,
+	[TransactionID] [int] NULL,
+	[StateIndicator] [smallint] NULL,
+	[InitiatedBy] [smallint] NULL,
+	[InitiatedOn] [datetime] NULL,
+	[AuthorisedBy] [smallint] NULL,
+	[AuthorisedOn] [datetime] NULL,
+	[SelectedBy] [smallint] NULL,
+	[BranchID] [smallint] NULL,
+	[ReplId] [smallint] NULL,
+	[AdvanceOnReceipt] [money] NULL,
+	[SocReceiptDetailsId] [int] IDENTITY(1,1) NOT NULL
+
+
+CREATE TABLE [dbo].[SocietyBillDetails](
+	[BillNo] [int] NOT NULL,
+	[BillDate] [datetime] NULL,
+	[LevelMasterId] [int] NULL,
+	[SocietyId] [int] NULL,
+	[FlatMasterID] [int] NULL,
+	[FlatNo] [int] NULL,
+	[Month] [varchar](8) NULL,
+	[FinYearFrom] [datetime] NULL,
+	[FinYearTo] [datetime] NULL,
+	[BillAmount] [money] NULL,
+	[GeneratedOn] [datetime] NULL,
+	[GeneratedBy] [smallint] NULL,
+	[BranchID] [smallint] NULL,
+	[ReplId] [smallint] NULL,
+	[Advance] [money] NULL,
+	[NetBillAmount] [money] NULL,
+	[SocietyBillDetailsId] [int] IDENTITY(1,1) NOT NULL,
+	[InterestArrears] [money] NULL
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[SocietyBillDetailBreakup](
+	[BillDetailBreakupId] [int] IDENTITY(1,1) NOT NULL,
+	[BillNo] [int] NOT NULL,
+	[CollectionID] [int] NULL,
+	[Amount] [money] NULL,
+	[BranchID] [smallint] NULL,
+	[ReplId] [smallint] NULL
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[SocBillMaster](
+	[SocBillMasterID] [int] IDENTITY(1,1) NOT NULL,
+	[SocietyID] [smallint] NULL,
+	[Description1] [varchar](200) NULL,
+	[Description2] [varchar](200) NULL,
+	[Description3] [varchar](200) NULL,
+	[Description4] [varchar](200) NULL,
+	[Description5] [varchar](200) NULL,
+	[Description6] [varchar](200) NULL,
+	[Description7] [varchar](200) NULL,
+	[Description8] [varchar](200) NULL,
+	[ReplID] [smallint] NULL,
+	[BranchId] [smallint] NULL,
+	[socAuthorityName] [varchar](100) NULL,
+
+
+
+CREATE TABLE [dbo].[SocAdditionalCollectionMaster](
+	[AddCollecionID] [int] NULL,
+	[CollectionName] [varchar](100) NULL,
+	[SocAdditionalCollectionMasterId] [int] IDENTITY(1,1) NOT NULL,
+	[BranchId] [smallint] NULL,
+	[ReplId] [smallint] NULL
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[LevelMaster](
+	[LevelMasterId] [int] IDENTITY(1,1) NOT NULL,
+	[SocietyId] [int] NOT NULL,
+	[ShortDescription] [varchar](100) NULL,
+	[FullDescription] [varchar](200) NULL,
+	[Modifiedby] [int] NULL,
+	[Modifiedon] [datetime] NULL,
+	[BranchId] [smallint] NULL,
+	[ReplId] [smallint] NULL
+) ON [PRIMARY]
+
+
+LevelMasterId	SocietyId	ShortDescription	FullDescription	Modifiedby	Modifiedon	BranchId	ReplId
+1	1	A	MAITRI ANAND A	881	2011-11-11 09:59:08.140	58	58
+2	1	B	MAITRI ANAND B	881	2011-11-11 09:59:12.653	58	58
+3	1	C	MAITRI ANAND C	881	2011-11-11 09:59:21.227	58	58
+4	1	D	MAITRI ANAND D	881	2011-11-11 09:59:24.120	58	58
+5	1	E	MAITRI ANAND E	881	2011-11-11 09:59:26.543	58	58
+6	1	F	MAITRI ANAND F	881	2011-11-11 09:59:29.650	58	58
+
+
+
+
+
+CREATE TABLE [dbo].[FlatMaster](
+	[FlatMasterId] [int] NOT NULL,
+	[LevelMasterId] [int] NOT NULL,
+	[SocietyId] [int] NOT NULL,
+	[FlatNo] [smallint] NULL,
+	[OwnerOfFlat] [varchar](150) NULL,
+	[Enteredby] [int] NULL,
+	[Enteredon] [datetime] NULL,
+	[Modifiedby] [int] NULL,
+	[Modifiedon] [datetime] NULL,
+	[Floor] [varchar](100) NULL,
+	[ContactDetails] [varchar](100) NULL,
+	[BuiltUpArea] [float] NULL,
+	[CarpetArea] [float] NULL,
+	[AdvanceAmount] [money] NULL,
+	[FlatMasterPId] [int] IDENTITY(1,1) NOT NULL,
+	[BranchId] [smallint] NULL,
+	[ReplId] [smallint] NULL,
+	[GlNodeId] [int] NULL,
+	[AccountMasterID] [int] NULL,
+	[SIdate] [int] NULL,
+	[InterestArrears] [money] NULL
+) ON [PRIMARY]
+
+
+
+
+CREATE TABLE [dbo].[CollectionMaster](
+	[CollectionID] [smallint] IDENTITY(1,1) NOT NULL,
+	[CollectionName] [varchar](150) NOT NULL,
+	[ActivationFlag] [smallint] NOT NULL,
+	[InputFlag] [smallint] NULL,
+	[EnteredBy] [smallint] NULL,
+	[EnteredOn] [datetime] NULL,
+	[ModifiedBy] [smallint] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[RentOrder] [int] NULL,
+	[BranchId] [smallint] NULL,
+	[ReplId] [smallint] NULL
+) ON [PRIMARY]
+
+
+CollectionID	CollectionName	ActivationFlag	InputFlag	EnteredBy	EnteredOn	ModifiedBy	ModifiedOn	RentOrder	BranchId	ReplId
+1	PROPERTY TAX	1	0	881	2011-11-25 10:40:13.687	2748	2016-11-07 11:39:04.523	3	58	58
+2	Renovation &  Painting Fund	1	0	881	2011-11-25 10:41:35.767	NULL	NULL	2	58	58
+3	WATER CHARGES	1	0	881	2011-11-25 10:42:13.837	2748	2016-11-07 11:39:13.530	3	58	58
+4	Rep. & Maint. Fund	1	0	881	2011-11-25 10:44:20.183	NULL	NULL	4	58	58
+6	Common Electricity Chg	1	0	881	2011-11-25 10:52:07.963	NULL	NULL	6	58	58
+7	Insurance	1	0	2040	2011-11-25 10:59:19.457	2040	2011-11-25 10:59:52.963	7	58	58
+8	NA TAX	1	0	2040	2011-11-25 11:00:22.597	NULL	NULL	8	58	58
+9	Lift, DG Set & Misc Maint.	1	0	2040	2011-11-25 11:01:23.727	NULL	NULL	9	58	58
+13	Other Charges	1	0	2040	2011-11-25 11:07:16.790	NULL	NULL	13	58	58
+14	Interest On Arrears	1	0	2040	2011-11-25 11:07:41.323	NULL	NULL	14	58	58
+15	REPAIRS	1	0	881	2011-12-01 13:06:02.213	NULL	NULL	1	58	58
+17	Festival Expenses	1	0	1389	2012-02-02 16:10:59.257	NULL	NULL	15	58	58
+18	Maintenance Chg	1	0	1389	2012-03-28 10:00:20.080	1389	2012-06-27 16:28:33.927	1	58	58
+19	Maintenance	1	0	1700	2012-06-27 13:07:13.780	NULL	NULL	1	58	58
+20	Repair Fund	1	0	1700	2012-06-27 13:08:37.157	NULL	NULL	3	58	58
+21	Tanker & Diesel	1	0	1700	2012-06-27 13:09:09.140	NULL	NULL	4	58	58
+22	Cultural Activity	1	0	1700	2012-06-27 13:09:45.853	NULL	NULL	6	58	58
+23	Fixed Charges	1	0	2040	2012-08-23 11:27:37.483	NULL	NULL	1	58	58
+24	Welfare Fund	1	0	2040	2012-08-23 11:30:14.923	NULL	NULL	2	58	58
+45	NON OCCUPANCY CHARGES	1	0	3367	2015-08-06 13:12:21.403	2748	2016-11-07 17:16:29.790	0	58	58
+26	society formetion fees & registration chrgs	1	0	2570	2014-04-02 10:55:02.953	NULL	NULL	0	58	58
+27	PAINTING REPAIR FUND	1	0	2570	2014-06-19 16:54:26.630	2748	2016-11-07 18:04:03.237	43	58	58
+67	ENTERTAINMENT CHARGES	1	0	2748	2016-11-03 12:42:35.583	2748	2016-11-07 11:39:36.880	0	58	58
+46	PARKING CHARGES APRIL 2015- JULY 2015	1	0	3367	2015-08-06 13:12:56.433	NULL	NULL	0	58	58
+30	ELECTRICITY CHG	1	0	2570	2014-06-28 12:09:00.167	NULL	NULL	0	58	58
+33	Flooering chgs	1	0	2570	2014-09-16 17:42:48.113	2570	2014-10-11 10:57:16.930	3	58	58
+34	Terrace Shed	1	0	2570	2014-09-16 17:44:08.420	NULL	NULL	0	58	58
+35	ANNUAL POOJA	1	0	2570	2014-09-17 10:29:44.423	NULL	NULL	0	58	58
+36	Reserve fund	1	0	2570	2014-10-09 10:39:28.823	NULL	NULL	1	58	58
+68	BUILDING REPAIR & COLOR FUND	1	0	2748	2016-11-03 12:51:42.153	2748	2016-11-03 12:53:46.130	0	58	58
+42	SPECIAL FUND	1	0	3171	2015-04-22 12:46:44.643	NULL	NULL	0	58	58
+40	CULTURAL FUND	1	0	3171	2015-04-15 16:46:27.247	NULL	NULL	0	58	58
+41	REPAIRS & MAINTENACE FUND	1	0	3171	2015-04-16 18:02:32.043	NULL	NULL	0	58	58
+43	service charges (2)	1	0	2748	2015-05-08 15:01:04.340	NULL	NULL	0	58	58
+69	DIFFERENCE ARREARS AMOUNT	1	0	2748	2016-12-16 13:11:56.960	NULL	NULL	0	58	58
+50	Education & Training Funds	1	0	3367	2015-11-03 17:31:04.090	NULL	NULL	0	58	58
+64	SECURITY CHARGES 	1	0	3659	2016-08-23 16:31:42.307	NULL	NULL	0	58	58
+57	SINKING FUND	1	0	3787	2016-04-30 15:04:08.510	2748	2016-11-07 11:39:56.797	2	58	58
+60	MUNICIPAL TAX	1	0	3787	2016-04-30 15:10:22.707	NULL	NULL	7	58	58
+65	AMC & SERVICES CHARGES	1	0	3659	2016-08-23 16:31:57.720	NULL	NULL	0	58	58
+66	Insurance Charges	1	0	3659	2016-08-23 16:32:34.253	NULL	NULL	7	58	58
+16	INFRA FUND	1	0	1389	2011-12-01 13:21:43.930	881	2012-02-02 15:56:31.687	2	58	58
+11	SERVICE CHARGES	1	0	2040	2011-11-25 11:04:01.570	2748	2016-11-07 11:40:10.883	11	58	58
+38	excess water chgs tmc jan-dec 14	1	0	2570	2014-12-04 16:19:22.960	2570	2014-12-04 16:24:11.393	1	58	58
+
+
+
+
+
+
